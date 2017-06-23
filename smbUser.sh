@@ -22,7 +22,7 @@ echo "sambaUsernamewd: ${sambaUsernamewd}"
 
 echo "create sysuser ,but not login system"
 
-useradd -d /home/"${sambaUsername}"  -g smbgrp -G www -m "${sambaUsername}" 
+useradd -d /home/"${sambaUsername}"  -g www -m "${sambaUsername}"
 sleep 2
 
 
@@ -46,6 +46,7 @@ echo "#browsable =yes" >> /etc/samba/smb.conf
 echo "writable = yes" >> /etc/samba/smb.conf
 echo "#guest ok = no" >> /etc/samba/smb.conf
 echo "#read only = no" >> /etc/samba/smb.conf
+echo "write list = +www" >> /etc/samba/smb.conf
 
 echo "write smb.conf finshed"
 

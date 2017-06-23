@@ -22,7 +22,7 @@ echo "sambaUsernamewd: ${sambaUsernamewd}"
 
 echo "create sysuser ,but not login system"
 
-useradd -d /home/"${sambaUsername}"  -g www -m "${sambaUsername}"
+useradd -d /home/"${sambaUsername}"  -g smbgrp -m "${sambaUsername}"
 sleep 2
 
 
