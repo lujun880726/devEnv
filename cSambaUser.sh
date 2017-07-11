@@ -2,6 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/expect:~/bin
 export PATH
 nginxPath=/opt/lnmp1.2/nginx
+baseDomain=tubiaojiao.com
 
 echo "Please setup samba user name"
 read -p "Please enter: " sambaUsername
@@ -22,7 +23,7 @@ echo "sambaUsernamewd: ${sambaUsernamewd}"
 
 echo "create sysuser ,but not login system"
 
-useradd -d /home/"${sambaUsername}"  -g smbgrp -m "${sambaUsername}"
+useradd -d /home/"${sambaUsername}"  -g www -m "${sambaUsername}"
 sleep 2
 
 
@@ -51,14 +52,14 @@ echo "write smb.conf finshed"
 
 echo "create new nginx conf"
 
-cp ${nginxPath}/conf/vhost/dev.jxch168.com.conf ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
+cp ${nginxPath}/conf/vhost/dev.${baseDomain}.conf ${nginxPath}/conf/vhost/${sambaUsername}.${baseDomain}.conf
 
 echo "edit nginx conf"
 
 #sed -i "s/dev/${sambaUsername}.dev/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
-sed -i "s/\/data\/www\/dev.jxch168.com/\/home\/${sambaUsername}\/${sambaUsername}.dev.jxch168.com/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
-sed -i "s/\/data\/wwwlogs\/dev.jxch168.com/\/home\/${sambaUsername}\/wwwlogs\/${sambaUsername}.dev.jxch168.com/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
-sed -i "/server_name/ s/dev.jxch168.com/${sambaUsername}.dev.jxch168.com/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
+sed -i "s/\/data\/www\/dev.${baseDomain}\/home\/${sambaUsername}\/${sambaUsername}.dev.${baseDomain}/g" ${nginxPath}/conf/vhost/${sambaUsername}.${baseDomain}.conf
+sed -i "s/\/data\/wwwlogs\/dev.${baseDomain}/\/home\/${sambaUsername}\/wwwlogs\/${sambaUsername}.dev.${baseDomain}/g" ${nginxPath}/conf/vhost/${sambaUsername}.${baseDomain}.conf
+sed -i "/server_name/ s/dev.${baseDomain}/${sambaUsername}.dev.${baseDomain}/g" ${nginxPath}/conf/vhost/${sambaUsername}.${baseDomain}.conf
 #sed -i "s/wwwlogs/${sambaUsername}\/wwwlogs/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
 #sed -i "s/wwwroot/${sambaUsername}/g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
 #sed -i "s/jxch.5pa.cn//g" ${nginxPath}/conf/vhost/${sambaUsername}.jxch168.com.conf
@@ -66,7 +67,7 @@ sed -i "/server_name/ s/dev.jxch168.com/${sambaUsername}.dev.jxch168.com/g" ${ng
 
 echo "mkdir path & chmod "
 
-mkdir -p /home/${sambaUsername}/${sambaUsername}.dev.jxch168.com
+mkdir -p /home/${sambaUsername}/${sambaUsername}.dev.${baseDomain}
 mkdir -p /home/${sambaUsername}/wwwlogs
 chown -R ${sambaUsername}:smbgrp /home/${sambaUsername}/
 chmod -R a+rwxt /home/${sambaUsername}/
@@ -74,7 +75,7 @@ chmod -R 777 /home/${sambaUsername}/
 
 
 echo "create index.php "
-echo "<?php phpinfo();?>" >> /home/${sambaUsername}/${sambaUsername}.dev.jxch168.com/index.php
+echo "<?php phpinfo();?>" >> /home/${sambaUsername}/${sambaUsername}.dev.${baseDomain}/index.php
 
 echo "nginx restart"
 
