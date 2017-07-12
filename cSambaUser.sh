@@ -69,9 +69,8 @@ echo "mkdir path & chmod "
 
 mkdir -p /home/${sambaUsername}/${sambaUsername}.dev.${baseDomain}
 mkdir -p /home/${sambaUsername}/wwwlogs
-chown -R ${sambaUsername}:smbgrp /home/${sambaUsername}/
-chmod -R a+rwxt /home/${sambaUsername}/
-chmod -R 777 /home/${sambaUsername}/
+chown -R ${sambaUsername}:www /home/${sambaUsername}/
+chmod -R 775 /home/${sambaUsername}/
 
 
 echo "create index.php "
