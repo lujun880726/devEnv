@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/expect:~/bin
 export PATH
 nginxPath=/usr/local/nginx
-wwwDomain=tubiaojia.com
+wwwDomain=demo.com
 
 echo "Please setup devname  "
 read -p "Please enter: " devname
@@ -24,7 +24,7 @@ echo "devpro: ${devpro}"
 
 echo "create new nginx conf"
 
-cp ./demo.tubiaojia.com ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
+cp ./demo.demo.com ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
 
 echo "edit nginx conf"
 
