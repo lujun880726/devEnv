@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/expect:~/bin
 export PATH
 nginxPath=/usr/local/nginx
-wwwDomain=demo.xyz
+wwwDomain=zhimafx.xyz
 
 echo "Please setup devname  "
 read -p "Please enter: " devname
@@ -67,7 +67,11 @@ svnuser=`grep ${devname} passwd | awk -F= '{print $1}'`
 svnpwd=`grep ${devname} passwd | awk -F= '{print $2}'`
 
 
-svn checkout --username ${svnuser} --password ${svnpwd} svn://192.168.0.21/${svnProName}/trunk .
+sudo -Hu ${devname} svn checkout --username ${svnuser} --password ${svnpwd} svn://192.168.0.21/${svnProName}/trunk . <<EOF
+yes
+EOF
+
+
 chmod -R 777 storage/
 
 rm -rf ./passwd
