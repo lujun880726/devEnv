@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/expect:~/bin
 export PATH
 nginxPath=/usr/local/nginx
-wwwDomain=demo.com
+wwwDomain=demo.xyz
 
 echo "Please setup devname  "
 read -p "Please enter: " devname
@@ -20,11 +20,18 @@ if [ "${devpro}" = "" ]; then
 fi
 echo "devpro: ${devpro}"
 
+echo "Please setup svnProName  "
+read -p "Please enter: " svnProName
+if [ "${svnProName}" = "" ]; then
+        echo "svnProName is not null!"
+        exit 0
+fi
+echo "svnProName: ${svnProName}"
 
 
 echo "create new nginx conf"
 
-cp ./demo.demo.com ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
+cp ./demo.zhimfx.xyz ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
 
 echo "edit nginx conf"
 
@@ -51,9 +58,21 @@ fi
 
 chmod -R 775 /home/${devname}/
 
+cd /home/${devname}/${devname}.${devpro}.${wwwDomain}
 
-echo "create index.php "
-echo "<?php phpinfo();?>" >> /home/${devname}/${devname}.${devpro}.${wwwDomain}/index.php
+scp 192.168.0.21:/home/wwwroot/svnAm/conf/passwd ./
+dos2unix passwd
+svnUserInfo=`cat passwd|grep ${devname}i`"="
+svnuser=`grep ${devname} passwd | awk -F= '{print $1}'`
+svnpwd=`grep ${devname} passwd | awk -F= '{print $2}'`
+
+
+svn checkout --username ${svnuser} --password ${svnpwd} svn://192.168.0.21/${svnProName}/trunk .
+chmod -R 777 storage/
+
+rm -rf ./passwd
+
+
 
 echo "nginx restart"
 
