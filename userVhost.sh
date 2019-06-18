@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/expect:~/bin
 export PATH
 nginxPath=/usr/local/nginx
-wwwDomain=zhimafx.xyz
+wwwDomain=demo.xyz
 
 echo "Please setup devname  "
 read -p "Please enter: " devname
@@ -31,7 +31,7 @@ echo "svnProName: ${svnProName}"
 
 echo "create new nginx conf"
 
-cp ./demo.zhimfx.xyz ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
+cp ./demo.demo.xyz ${nginxPath}/conf/vhost/${devname}.${devpro}.${wwwDomain}.conf
 
 echo "edit nginx conf"
 
