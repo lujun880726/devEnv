@@ -1,8 +1,7 @@
 #!/bin/bash
 export update_time=$(date +%Y%m%d%H%M%S)
 
-#Folder_A=/home/lujun/lujun.dev.jxch168.com/cli/Daemon  
-Folder_A=/home/wwwroot/m2.jxch168.com/cli/Daemon  
+Folder_A=/home/wwwroot/www.baidu.com/cli/Daemon  
 for file_a in ${Folder_A}/*; do  
     temp_file=`basename $file_a`  
     count=`ps -ef |grep $temp_file |grep -v "grep" |wc -l`
