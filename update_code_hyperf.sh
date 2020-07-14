@@ -1,4 +1,4 @@
-www.demo#!/bin/bash
+#!/bin/bash
 
 
 
