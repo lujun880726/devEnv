@@ -26,7 +26,7 @@ if ($con) {
             if (!empty($result)) {
                 foreach ($result as $key => $value) {
                     $tmp_key = '(`' . implode('`,`', array_keys($value)) . '`) values ';
-                    $tmp_value .= '("' . implode('","', array_values($value)) . '"),';
+                    $tmp_value .= "('" . implode("','", array_values($value)) . "'),";
                 }
                 $sql = "insert into `" . $val . "`" . $tmp_key . $tmp_value;
                 $sql = substr($sql, 0, -1) . ";\r\n";
