@@ -1,0 +1,1 @@
+redis-cli -h 127.0.0.1 -p 6379  -n 2 KEYS "demokey*" |xargs redis-cli -h 127.0.0.1 -p 6379  -n 2  del
